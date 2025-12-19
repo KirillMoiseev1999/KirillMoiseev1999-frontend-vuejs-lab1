@@ -1,44 +1,26 @@
-# .
+(скачать архив, распаковать и в терминале запустить npm install или npm ci)
 
-This template should help get you started developing with Vue 3 in Vite.
+Создать интерактивный калькулятор бюджета, который помогает пользователю управлять доходами и расходами.
 
-## Recommended IDE Setup
+App
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+в App, должно быть общее состояние транзакций.
+из BudgetForm приходят данные и меняют состояние транзакций (добавляет новый элемент)
 
-## Recommended Browser Setup
+когда данные приходят из формы через watch сохранять их в localstorage, при обновлении страницы считывать данные из localstorage в транзакцию (сделать когда все остальное будет готово)
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) 
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+BudgetTable
 
-## Customize configuration
+выводит данные из транзакций
+Компонент должен уметь удалять данные, т.е отправляет событие на вверх
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+<th class="p-2">button</th> (Цена) - сделать кнопкой и добавить сортировку
 
-## Project Setup
+BudgetSummary
 
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+Вычисляемые значения:
+totalIncome — сумма всех доходов
+totalExpenses — сумма всех расходов
+balance — текущий бюджет (доходы − расходы)
+и computed который будет проверять отрицательный бюджет
+показывать\скрывать поле <p class="mt-4 text-red-500 font-medium">Ваш баланс отрицательный!</p>
