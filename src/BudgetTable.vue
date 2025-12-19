@@ -10,33 +10,30 @@ const { transactions } = defineProps({
   transactions: null,
 })
 
-const sorting = ref('no') // 'no', 'desc', 'asc'
+const sorting = ref('no')
 
 function switchSorting() {
   switch (sorting.value) {
     case 'no':
-      sorting.value = 'desc' // первый клик — убывание
+      sorting.value = 'desc'
       break
     case 'desc':
-      sorting.value = 'asc' // второй — возрастание
+      sorting.value = 'asc'
       break
     case 'asc':
-      sorting.value = 'no' // третий — сброс
-      break
+      sorting.value = 'no'
   }
 }
 
 const sortedTransactions = computed(() => {
   const newTransactions = [...transactions]
   if (sorting.value === 'asc') {
-    // по возрастанию: от малого к большому
     newTransactions.sort(
       (a, b) =>
         (a.type === 'income' ? a.value : -a.value) - (b.type === 'income' ? b.value : -b.value),
     )
   }
   if (sorting.value === 'desc') {
-    // по убыванию: от большого к малому
     newTransactions.sort(
       (a, b) =>
         (b.type === 'income' ? b.value : -b.value) - (a.type === 'income' ? a.value : -a.value),
@@ -45,7 +42,6 @@ const sortedTransactions = computed(() => {
   return newTransactions
 })
 
-// Функция для отображения значка
 function getSortSymbol() {
   switch (sorting.value) {
     case 'desc':
